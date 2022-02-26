@@ -1,0 +1,75 @@
+{
+  "tests": [
+    {
+      "Id": 1,
+      "Intro": "test test",
+      "DateCreated": "25.3.22",
+      "MinimumToPass": 55,
+      "Title": "test title",
+      "FieldOfStudyId": 1,
+      "CompanyId": 1
+    },
+    {
+      "Id": 3,
+      "Intro": "test test 2",
+      "DateCreated": "25.10.22",
+      "MinimumToPass": 55,
+      "Title": "test title 2",
+      "FieldOfStudyId": 1,
+      "CompanyId": 1
+    },
+    {
+      "Id": 2,
+      "Intro": "test test 3",
+      "DateCreated": "25.2.22",
+      "MinimumToPass": 55,
+      "Title": "test title 3",
+      "FieldOfStudyId": 1,
+      "CompanyId": 1
+    }
+  ],
+  "questions": [
+    {
+      "Id": 1,
+      "Title": "some question",
+      "Content": "question",
+      "IsSingleChoice": true,
+      "TestId": 1
+    },
+    {
+      "Id": 2,
+      "Title": "some question",
+      "Content": "question",
+      "IsSingleChoice": true,
+      "TestId": 1
+    },
+    {
+      "Id": 3,
+      "Title": "some question",
+      "Content": "question",
+      "IsSingleChoice": true,
+      "TestId": 2
+    },
+    {
+      "Id": 4,
+      "Title": "some question",
+      "Content": "question",
+      "IsSingleChoice": false,
+      "TestId": 3
+    }
+  ],
+  "answers": [
+    {
+      "Id": 1,
+      "Content": "Yes",
+      "IsTrue": true,
+      "QuestionId": 1
+    },
+    {
+      "Id": 1,
+      "Content": "No",
+      "IsTrue": false,
+      "QuestionId": 1
+    }
+  ]
+}
