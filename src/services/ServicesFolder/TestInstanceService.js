@@ -1,11 +1,14 @@
 import http from "../httpService";
 
 
-const serverRoute = "/TestInstance/";
+const serverRoute = "/TestInstancesRoutes/";
 
 const TestInstanceService = { 
   async AddTestInstance(TestInstance) {
-     await http.post(serverRoute + "create", TestInstance);
+    await http.post(serverRoute + "create",  TestInstance)
+      .catch((err) => {
+        console.log(err);
+      });
   },
   
   async UpdateTestInstance(newTestInstance) {

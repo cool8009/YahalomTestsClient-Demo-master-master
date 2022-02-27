@@ -11,7 +11,7 @@ const TestCard = ({ test }) => {
       <button
         className="btn"
         style={{ backgroundColor: "green" }}
-        onClick={() => navigate('/test/' + test.TestId)}
+        onClick={() => navigate('/testform/' + test.TestId)}
       >
         Take Test
       </button>

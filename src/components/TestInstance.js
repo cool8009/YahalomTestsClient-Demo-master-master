@@ -68,6 +68,7 @@ const TestInstance = () => {
         .then((answers) => {
           setCurrentAnswers(answers);
         });
+      
     }
     else {
       setFinishedTest(true);
