@@ -14,7 +14,7 @@ const QuestionComponent = ({onSubmit}) => {
 
   const AddQuestion = () => {
     const question = {Title: title,Content: content,IsSingleChoice: isSingleChoice};
-    // onSubmit({question,tags,Answers: answers});
+    onSubmit({question: question, tags,Answers: answers});
   }
 
   return (
@@ -44,7 +44,7 @@ const QuestionComponent = ({onSubmit}) => {
           />
         </div>
         <AnswerComponent onSubmit={AddAnswers}/>
-        <input className="btn" type="submit" value="Create Test" onClick={onSubmit()} />
+        <input className="btn" type="submit" value="Create Test" onClick={AddQuestion()} />
       </form>
     );
 }
