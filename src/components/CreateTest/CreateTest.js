@@ -3,24 +3,25 @@ import React, { useEffect, useState } from "react";
 import CompanyService from "../../services/ServicesFolder/CompanyService"
 import FieldOfStudyService from "../../services/ServicesFolder/FieldOfStudyService"
 
-const canStartTest = () => {
-  const [Questions, setQuestions ]= useState([])
 
-  const [Intro, setIntro]=useState('');    
-  const [MinimumToPass, setMinimumToPass]=useState(55);    
-  const [Title, setTitle]=useState('');    
-  const [FieldOfStudyId, setFieldOfStudyId]=useState();
-  const [CompanyId, setCompanyId]=useState();
+
+const CreateTest = () => {
+  const [questions, setQuestions ]= useState([])
+
+  const [intro, setIntro]=useState('');    
+  const [minimumToPass, setMinimumToPass]=useState(55);    
+  const [title, setTitle]=useState('');    
+  const [fieldOfStudyId, setFieldOfStudyId]=useState();
+  const [companyId, setCompanyId]=useState();
 
   const allCompanyes = CompanyService.GetAllCompanys();
   const allFieldsOfStudy = FieldOfStudyService.GetAllFieldsOfStudy();
-
   const AddQuestion=(question)=>{
-    setQuestions([...Questions,question])
+    setQuestions([...questions,question])
   }
-
+  // onSubmit={onSubmit}
   return (
-      <form className="add-form" onSubmit={onSubmit}>
+      <form className="add-form" >
         <div className="form-control">
           <label>Enter Title</label>
           <input
@@ -42,7 +43,7 @@ const canStartTest = () => {
           <input
             type="text"
             placeholder="Intro"
-            onChange={(e) => setLastName(e.target.value)}
+            
           />
         </div>
         <div className="form-control form-control-check">
@@ -50,7 +51,7 @@ const canStartTest = () => {
           <input
             type="text"
             placeholder="Intro"
-            onChange={(e) => setLastName(e.target.value)}
+            
           />
         </div>
         <QuestionComponent onSubmit={AddQuestion} />
@@ -58,3 +59,5 @@ const canStartTest = () => {
       </form>
     );
 }
+
+export default CreateTest

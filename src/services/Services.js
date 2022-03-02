@@ -5,5 +5,6 @@ module.exports = {
     CompanyService: require('./ServicesFolder/CompanyService'),
     FieldOfStudyIdService: require('./ServicesFolder/FieldOfStudyService'),
     TestInstanceService: require('./ServicesFolder/TestInstanceService'),
-    AnswerService: require('./ServicesFolder/AnswerService')
+    AnswerService: require('./ServicesFolder/AnswerService'),
+    AnswerInstanceService: require('./ServicesFolder/AnswerInstanceService'),
 }

@@ -2,19 +2,19 @@ import AnswerComponent from "./AnswerComponent";
 import React, { useEffect, useState } from "react";
 
 const QuestionComponent = ({onSubmit}) => {
-  const [Answers, setAnswers ]= useState([])
+  const [answers, setAnswers ]= useState([])
 
-  const [Title, setTitle]=useState('');    
-  const [Content, setContent]=useState('');
-  const [IsSingleChoice, setIsSingleChoice]=useState(true);
+  const [title, setTitle]=useState('');    
+  const [content, setContent]=useState('');
+  const [isSingleChoice, setIsSingleChoice]=useState(true);
 
   const AddAnswers=(answer)=>{
-    setAnswers([...Answers,answer]);
+    setAnswers([...answers,answer]);
   }
 
-  const AddQuestion(){
-      const question = {Title,Content,IsSingleChoice};
-      onSubmit({question,tags,Answers});
+  const AddQuestion = () => {
+    const question = {Title: title,Content: content,IsSingleChoice: isSingleChoice};
+    // onSubmit({question,tags,Answers: answers});
   }
 
   return (
