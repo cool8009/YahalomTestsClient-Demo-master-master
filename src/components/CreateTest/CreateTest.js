@@ -6,7 +6,7 @@ import FieldOfStudyService from "../../services/ServicesFolder/FieldOfStudyServi
 
 
 const CreateTest = () => {
-  const [questions, setQuestions ]= useState([])
+  const [questions, setQuestions ]= useState([]);
   const [intro, setIntro]=useState('');    
   const [minimumToPass, setMinimumToPass]=useState(55);    
   const [title, setTitle]=useState('');    
@@ -16,10 +16,13 @@ const CreateTest = () => {
   const allCompanyes = CompanyService.GetAllCompanys();
   const allFieldsOfStudy = FieldOfStudyService.GetAllFieldsOfStudy();
 
+  const [companyes, setCompanyes ]= useState([]);
+  const [fieldsOfStudy, setFieldsOfStudy ]= useState([])
+
   const AddQuestion=(question)=>{
     setQuestions([...questions,question])
   }
-  // onSubmit={onSubmit}
+
   return (
       <form className="add-form" >
         <div className="form-control">
@@ -48,14 +51,21 @@ const CreateTest = () => {
         </div>
         <div className="form-control form-control-check">
           <label>check company</label>
-          <select>
-          {allCompanyes.map(company =>
-            <option id={company.companyId}>
-              {company.CompanyName}
-            </option> )}
-          </select>
+          <select 
+                   isMulti = {false}
+                   options={allCompanyes}
+                   onChange={(e) => setCompanyes(e.target.value.CompanyId)}/>
         </div>
-        <QuestionComponent onSubmit={AddQuestion} />
+        <div className="form-control form-control-check">
+          <label>check Field Of Study</label>
+          <select 
+                   isMulti = {false}
+                   options={allFieldsOfStudy}
+                   onChange={(e) => setFieldsOfStudy(e.target.value.FieldOfStudyId)}/>
+        </div>
+        <div>
+          <QuestionComponent AddQuestion={AddQuestion} />
+        </div>
         <input className="btn" type="submit" value="Create Test" />
       </form>
     );
