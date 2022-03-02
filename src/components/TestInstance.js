@@ -4,6 +4,7 @@ import QuestionService from "../services/ServicesFolder/QuestionService"
 import AnswerService from "../services/ServicesFolder/AnswerService"
 import QuestionInstance from "../components/TestInstanceComponents/QuestionInstance";
 import Answers from "./TestInstanceComponents/Answers";
+import EndTest from "./EndTest";
 
 const TestInstance = () => {
   const [questions, setQuestions] = useState([]);
@@ -13,6 +14,7 @@ const TestInstance = () => {
   const [questionCounter, setQuestionCounter] = useState(0);
   const [canStartTest, setCanStartTest] = useState(false);
   const [finishedTest, setFinishedTest] = useState(false);
+  const [submittedAnswers, setSubmittedAnswers] = useState([])
 
   function shuffleArray(array) {
     if (array.length === 0) return array;
@@ -22,8 +24,31 @@ const TestInstance = () => {
     }
   }
 
+  const handleUpdateSubmittedAnswers = (index, submittedAnswer) => {
+  const newTodos = [...submittedAnswers];
+  newTodos[index] = submittedAnswer;
+  setSubmittedAnswers(newTodos);
+}
+  function onAnswerSubmit(submittedAnswer) {
+    let answerExists = false;
+    if (submittedAnswers.length === 0)
+      setSubmittedAnswers([...submittedAnswers, submittedAnswer]);
+    else {
+      submittedAnswers.forEach((answer, index) => {
+        if(answer.QuestionId === submittedAnswer.QuestionId) {
+          handleUpdateSubmittedAnswers(submittedAnswer, index)
+          answerExists = true;
+        }
+        });
+      if (answerExists)
+        return;
+      else
+        setSubmittedAnswers([...submittedAnswers,submittedAnswer])
+    }
+  }
+
   let navigate = useNavigate();
-  let { id } = useParams();
+  let { id, testinstanceid } = useParams();
   useEffect(() => {
     const initializeTestQuestions = async () => {
         const questionsForCurrentTest = await getQuestionsForCurrentTest();
@@ -96,11 +121,12 @@ const TestInstance = () => {
                     else
                       return (
                       <QuestionInstance 
-                      currentQuestion={currentQuestion} 
-                      currentAnswers={currentAnswers}
-                      questionCounter={questionCounter}
-                      onQuestionSubmit={() => onQuestionSubmit()}
-                      totalQuestions={questions.length}
+                        currentQuestion={currentQuestion} 
+                        currentAnswers={currentAnswers}
+                        questionCounter={questionCounter}
+                        onAnswerSubmit={onAnswerSubmit}
+                        onQuestionSubmit={() => onQuestionSubmit()}
+                        totalQuestions={questions.length}
                       />)
                     })()
                   }
@@ -109,7 +135,10 @@ const TestInstance = () => {
           else 
               return (
                 <div className="test-container">
-                  <p>thank you! Results will be mailed to you.</p>
+                  <EndTest 
+                    submittedAnswers={submittedAnswers}
+                    testinstanceId={testinstanceid}
+                  />
                 </div>
               )
         })()

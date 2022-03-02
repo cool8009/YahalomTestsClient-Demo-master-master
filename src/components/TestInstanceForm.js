@@ -29,7 +29,7 @@ const TestInstanceForm = () => {
         let FirstName = firstName;
         let LastName = lastName;
         await createTestInstance({ TestId ,Email, FirstName, LastName })
-            .then(() => navigate('/test/' + id));
+            .then((testinstance) => navigate(`/test/${id}/${testinstance.TestInstanceId}`));
         
       };
 

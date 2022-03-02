@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Answers from './Answers';
 
-const QuestionInstance = ({ currentQuestion, currentAnswers, onQuestionSubmit, questionCounter, totalQuestions }) => {
+const QuestionInstance = ({ currentQuestion, currentAnswers, onQuestionSubmit, questionCounter, totalQuestions, onAnswerSubmit}) => {
     
     const [isChecked, setIsChecked] = useState(false);
     const [isTrueAnswers, setIsTrueAnswers] = useState(false);
@@ -16,8 +16,11 @@ const QuestionInstance = ({ currentQuestion, currentAnswers, onQuestionSubmit, q
          
         <div>
           <p>{currentQuestion.Title}</p>
-          <Answers currentAnswers={currentAnswers} isChecked={isChecked}/>
-          <button type='submit' onClick={onQuestionSubmit}>Submit</button>
+          <Answers 
+            currentAnswers={currentAnswers} 
+            isChecked={isChecked}
+          />
+          <button type='submit' onClick={() => { onQuestionSubmit(); onAnswerSubmit();}}>Submit</button>
           {
             <p>Current question: {questionCounter} / {totalQuestions}</p>} 
         </div>
