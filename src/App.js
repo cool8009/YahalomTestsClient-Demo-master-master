@@ -6,7 +6,8 @@ import Questions from "./components/Questions";
 import Tests from "./components/Tests";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TestInstance from "./components/TestInstance";
-import TestInstanceForm from "components/TestInstanceForm";
+import TestInstanceForm from "./components/TestInstanceForm";
+import CreateTest from "./components/CreateTest/CreateTest";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/test/:id" element={<TestInstance />} />       
         <Route path="/test/:id/:testinstanceid" element={<TestInstance />} />       
         <Route path="/testform/:id" element={<TestInstanceForm />} />       
+        <Route path="/createtest" element={<CreateTest />} />       
       </Routes>
     </Router>
   );
