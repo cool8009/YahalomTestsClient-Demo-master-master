@@ -15,6 +15,7 @@ const CreateTest = () => {
 
   const allCompanyes = CompanyService.GetAllCompanys();
   const allFieldsOfStudy = FieldOfStudyService.GetAllFieldsOfStudy();
+
   const AddQuestion=(question)=>{
     setQuestions([...questions,question])
   }
@@ -42,16 +43,17 @@ const CreateTest = () => {
           <input
             type="text"
             placeholder="Intro"
-            
+            onChange={(e) => setIntro(e.target.value)}
           />
         </div>
         <div className="form-control form-control-check">
-          <label>Check Intro</label>
-          <input
-            type="text"
-            placeholder="Intro"
-            
-          />
+          <label>check company</label>
+          <select>
+          {allCompanyes.map(company =>
+            <option id={company.companyId}>
+              {company.CompanyName}
+            </option> )}
+          </select>
         </div>
         <QuestionComponent onSubmit={AddQuestion} />
         <input className="btn" type="submit" value="Create Test" />
