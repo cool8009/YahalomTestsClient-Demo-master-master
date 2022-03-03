@@ -31,7 +31,7 @@ const AnswerComponent = ({AddAnswers}) => {
             onChange={(e) => setisTrue(e.target.value)}
           />
         </div>
-        <input className="btn" type="submit" value="Create Answer"  onClick={submittedAnswer}/>
+        <input className="btn" type="submit" value="Create Answer"  onSubmit={submittedAnswer}/>
       </form>
     );
 }

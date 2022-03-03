@@ -2,6 +2,7 @@ import QuestionComponent from "./QuestionComponent";
 import React, { useEffect, useState } from "react";
 import CompanyService from "../../services/ServicesFolder/CompanyService"
 import FieldOfStudyService from "../../services/ServicesFolder/FieldOfStudyService"
+import TestService  from "../../services/ServicesFolder/TestService";
 
 
 
@@ -12,14 +13,18 @@ const CreateTest = () => {
   const [title, setTitle]=useState('');    
   const [fieldOfStudyId, setFieldOfStudyId]=useState();
   const [companyId, setCompanyId]=useState();
-
  
   const [allCompanies, setAllCompanies] = useState([]);
   const [allFieldsOfStudy, setAllFieldsOfStudy] = useState([]);
-
-  const [companyes, setCompanies ]= useState([]);
-  const [fieldsOfStudy, setFieldsOfStudy ]= useState([])
   
+  const selectedCompany = (company) => {
+    setCompanyId = company.companyId;
+  };
+
+  const selectedFieldOfStudy = (fieldOfStudy) => {
+    setFieldOfStudyId = fieldOfStudy.FieldOfStudyId;
+  };
+
   useEffect(() => {
     const initializeAllCompanies = async () => {
       const allCompanyes = await CompanyService.GetAllCompanys()
@@ -36,6 +41,17 @@ const CreateTest = () => {
 
   const AddQuestion=(question)=>{
     setQuestions([...questions,question])
+  }
+
+  const SendTest=()=>{
+    let test ={      
+      Intro: intro,
+      MinimumToPass: minimumToPass,
+      Title: title,
+      FieldOfStudyId: fieldOfStudyId,
+      CompanyId: companyId
+    } 
+    TestService.AddTest({test: test , questions: questions});
   }
 
   return (
@@ -66,22 +82,24 @@ const CreateTest = () => {
         </div>
         <div className="form-control form-control-check">
           <label>check company</label>
-          <select 
-                   isMulti = {false}
-                   options={allCompanies}
-                   onChange={(e) => setCompanies(e.target.value.CompanyId)}/>
+          <select onChange={selectedCompany}>
+            {allCompanies.map((Company) => (
+            <option id={Company.CompanyId}>{Company.CompanyName}</option>
+          ))}
+          </select>
         </div>
         <div className="form-control form-control-check">
           <label>check Field Of Study</label>
-          <select 
-                   isMulti = {false}
-                   options={allFieldsOfStudy}
-                   onChange={(e) => setFieldsOfStudy(e.target.value.FieldOfStudyId)}/>
+          <select onChange={selectedFieldOfStudy}>
+            {allFieldsOfStudy.map((fieldOfStudy) => (
+            <option id={fieldOfStudy.FieldOfStudyId}>{fieldOfStudy.FieldName}</option>
+          ))}
+          </select>
         </div>
         <div>
           <QuestionComponent AddQuestion={AddQuestion} />
         </div>
-        <input className="btn" type="submit" value="Create Test" />
+        <input className="btn" type="submit" value="Create Test" onClick={SendTest}/>
       </form>
     );
 }
