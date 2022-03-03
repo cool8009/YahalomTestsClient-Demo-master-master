@@ -5,10 +5,11 @@ const serverRoute = "/TestInstancesRoutes/";
 
 const TestInstanceService = { 
   async AddTestInstance(TestInstance) {
-    await http.post(serverRoute + "create",  TestInstance)
+    const result = await http.post(serverRoute + "create",  TestInstance)
       .catch((err) => {
         console.log(err);
       });
+      return result;
   },
   
   async UpdateTestInstance(newTestInstance) {

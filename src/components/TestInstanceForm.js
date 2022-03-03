@@ -9,7 +9,8 @@ const TestInstanceForm = () => {
     let { id } = useParams();
     let navigate = useNavigate();
     const createTestInstance = async (TestInstance) => {
-        await TestInstanceService.AddTestInstance(TestInstance);
+        const testinstanceid = await TestInstanceService.AddTestInstance(TestInstance);
+        return testinstanceid;
         
     }
 
@@ -28,10 +29,11 @@ const TestInstanceForm = () => {
         let Email = email;
         let FirstName = firstName;
         let LastName = lastName;
-        await createTestInstance({ TestId ,Email, FirstName, LastName })
-            .then((testinstance) => navigate(`/test/${id}/${testinstance.TestInstanceId}`));
+        const value = await createTestInstance({ TestId ,Email, FirstName, LastName })
+            .then((res) => {return res.data})
+            .then((res) => navigate('/test/' + id + '/' + res)
         
-      };
+            )};
 
       return (
         <form className="add-form" onSubmit={onSubmit}>

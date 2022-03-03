@@ -13,11 +13,26 @@ const CreateTest = () => {
   const [fieldOfStudyId, setFieldOfStudyId]=useState();
   const [companyId, setCompanyId]=useState();
 
-  const allCompanyes = CompanyService.GetAllCompanys();
-  const allFieldsOfStudy = FieldOfStudyService.GetAllFieldsOfStudy();
+ 
+  const [allCompanies, setAllCompanies] = useState([]);
+  const [allFieldsOfStudy, setAllFieldsOfStudy] = useState([]);
 
-  const [companyes, setCompanyes ]= useState([]);
+  const [companyes, setCompanies ]= useState([]);
   const [fieldsOfStudy, setFieldsOfStudy ]= useState([])
+  
+  useEffect(() => {
+    const initializeAllCompanies = async () => {
+      const allCompanyes = await CompanyService.GetAllCompanys()
+        .catch(err => console.log(err));
+      setAllCompanies(allCompanyes);
+      initializeAllFieldsOfStudy();
+    }
+    const initializeAllFieldsOfStudy = async () => {
+      const allFieldsOfStudy = await FieldOfStudyService.GetAllFieldsOfStudy();
+      setAllFieldsOfStudy(allFieldsOfStudy);
+    }
+    initializeAllCompanies();
+  }, [])
 
   const AddQuestion=(question)=>{
     setQuestions([...questions,question])
@@ -53,8 +68,8 @@ const CreateTest = () => {
           <label>check company</label>
           <select 
                    isMulti = {false}
-                   options={allCompanyes}
-                   onChange={(e) => setCompanyes(e.target.value.CompanyId)}/>
+                   options={allCompanies}
+                   onChange={(e) => setCompanies(e.target.value.CompanyId)}/>
         </div>
         <div className="form-control form-control-check">
           <label>check Field Of Study</label>

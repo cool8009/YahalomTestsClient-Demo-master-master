@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 const AnswerInstance = ({answer}) => {
-  const [isSingleChoice, setIsSingleChoice] = useState(answer.IsSingleChoice);
+  const isSingleChoice= answer.IsSingleChoice;
   return (
     <div>
         <input    
