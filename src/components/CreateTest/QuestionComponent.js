@@ -11,7 +11,7 @@ const QuestionComponent = ({AddQuestion}) => {
 
   const [Tags, setTags] = useState([]);
 
-  const allTags = async() =>await TagService.GetAllTags();
+  const allTags = TagService.GetAllTags();
 
   const AddAnswers=(answer)=>{
     setAnswers([...answers, answer]);
@@ -54,11 +54,11 @@ const QuestionComponent = ({AddQuestion}) => {
         </div>
         <div className="form-control form-control-check">
           <label>check tag</label>
-          <select > 
-            {allTags().map((tag) => (
-              <option>{tag.Title}</option>
-            ))}
-            </select>
+          <select 
+                   isMulti = {true}
+                   options={allTags}
+                   closeMenuOnSelect={false}
+                   onChange={selectedTag}/>
         </div>
         <div>
           <AnswerComponent AddAnswers={AddAnswers}/>
