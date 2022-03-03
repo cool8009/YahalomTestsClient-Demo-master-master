@@ -1,8 +1,15 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
-const EndTest = (params) => {
+const EndTest = ({submittedAnswer, testinstanceid, onTestSubmit}) => {
+  useEffect(() => {
+
+  }, [])
   return (
-    <div>{params.testinstanceid}</div>
+    <div>
+      Thank you! to submit your results press submit.
+      <button type='submit' onClick={() => onTestSubmit(testinstanceid)}>Submit</button>
+      
+    </div>
   )
 }
 

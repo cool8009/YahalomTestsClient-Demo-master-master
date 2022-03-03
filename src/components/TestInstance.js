@@ -25,9 +25,9 @@ const TestInstance = () => {
   }
 
   const handleUpdateSubmittedAnswers = (index, submittedAnswer) => {
-  const newTodos = [...submittedAnswers];
-  newTodos[index] = submittedAnswer;
-  setSubmittedAnswers(newTodos);
+    const newSubmittedAnswers = [...submittedAnswers];
+    newSubmittedAnswers[index] = submittedAnswer;
+    setSubmittedAnswers(newSubmittedAnswers);
 }
   function onAnswerSubmit(submittedAnswer) {
     let answerExists = false;
@@ -48,7 +48,7 @@ const TestInstance = () => {
   }
 
   let navigate = useNavigate();
-  let { id, testinstanceid } = useParams();
+  let { id, res: testinstanceid } = useParams();
   useEffect(() => {
     const initializeTestQuestions = async () => {
         const questionsForCurrentTest = await getQuestionsForCurrentTest();
@@ -100,6 +100,15 @@ const TestInstance = () => {
     }
   }
 
+  const onTestSubmit = async (testInstanceId) => {
+    let scorePerQuestion = Math.round(100 / questions.length);
+    let userGrade = 0;
+    submittedAnswers.forEach((answer) => {
+      if (answer.IsTrue)
+        userGrade += scorePerQuestion;
+    });
+
+  }
   return (
     <div>
       {
@@ -127,6 +136,8 @@ const TestInstance = () => {
                         onAnswerSubmit={onAnswerSubmit}
                         onQuestionSubmit={() => onQuestionSubmit()}
                         totalQuestions={questions.length}
+                        submittedAnswers={submittedAnswers}
+                        setSubmittedAnswers={setSubmittedAnswers}
                       />)
                     })()
                   }
@@ -138,6 +149,7 @@ const TestInstance = () => {
                   <EndTest 
                     submittedAnswers={submittedAnswers}
                     testinstanceId={testinstanceid}
+                    onTestSubmit={onTestSubmit}
                   />
                 </div>
               )
