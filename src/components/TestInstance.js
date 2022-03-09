@@ -35,7 +35,8 @@ const TestInstance = () => {
       setSubmittedAnswers([...submittedAnswers, submittedAnswer]);
     else {
       submittedAnswers.forEach((answer, index) => {
-        if(answer.QuestionId === submittedAnswer.QuestionId) {
+        
+        if(answer.QuestionId === submittedAnswer.QuestionId) {         
           handleUpdateSubmittedAnswers(submittedAnswer, index)
           answerExists = true;
         }
@@ -127,6 +128,8 @@ const TestInstance = () => {
                         onAnswerSubmit={onAnswerSubmit}
                         onQuestionSubmit={() => onQuestionSubmit()}
                         totalQuestions={questions.length}
+                        submittedAnswers={submittedAnswers}
+                        setSubmittedAnswers={setSubmittedAnswers}
                       />)
                     })()
                   }
