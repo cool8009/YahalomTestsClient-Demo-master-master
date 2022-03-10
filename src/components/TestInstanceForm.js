@@ -29,12 +29,13 @@ const TestInstanceForm = () => {
         let Email = email;
         let FirstName = firstName;
         let LastName = lastName;
+        debugger;
         const value = await createTestInstance({ TestId ,Email, FirstName, LastName })
             .then((res) => {return res.data})
             .then((res) => navigate('/test/' + id + '/' + res)
-        
+            
             )};
-
+        
       return (
         <form className="add-form" onSubmit={onSubmit}>
           <div className="form-control">

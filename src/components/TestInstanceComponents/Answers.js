@@ -3,7 +3,7 @@ import AnswerInstance from "./AnswerInstance";
 
 const Answers = ({ currentAnswers, submittedAnswers,
   setSubmittedAnswers, isSingleChoice, onQuestionSubmit, onAnswerSubmit }) => {
-    const [selectedRadioButton, setSelectedRadioButton] = useState();
+    const [selectedRadioButton, setSelectedRadioButton] = useState(false);
 
     const isRadioSelected = (value) => {
     
