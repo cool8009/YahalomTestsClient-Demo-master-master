@@ -77,7 +77,7 @@ const TestInstance = () => {
       setCurrentQuestion(questions[counter]);
       setQuestionCounter(questionCounter + 1);
       const nextAnswers = await getAnswersForCurrentQuestion(
-        questions[questionCounter].QuestionId
+        questions[questionCounter + 1].QuestionId
       ).then((answers) => {
         setCurrentAnswers(answers);
       });

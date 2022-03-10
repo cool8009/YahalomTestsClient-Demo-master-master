@@ -53,6 +53,8 @@ const CreateTest = () => {
   }
 
   return (
+    <div className="homeContainer">
+
       <form className="add-form" >
         <div className="form-control">
           <label>Enter Title</label>
@@ -99,6 +101,7 @@ const CreateTest = () => {
         </div>
         <input className="btn" type="submit" value="Create Test" onClick={SendTest}/>
       </form>
+    </div>
     );
 }
 
