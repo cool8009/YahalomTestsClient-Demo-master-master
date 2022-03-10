@@ -1,10 +1,8 @@
-import QuestionComponent from "./QuestionComponent";
+import QuestionComponent from "./CreateQuestionComponent";
 import React, { useEffect, useState } from "react";
 import CompanyService from "../../services/ServicesFolder/CompanyService"
 import FieldOfStudyService from "../../services/ServicesFolder/FieldOfStudyService"
 import TestService  from "../../services/ServicesFolder/TestService";
-
-
 
 const CreateTest = () => {
   const [questions, setQuestions ]= useState([]);
