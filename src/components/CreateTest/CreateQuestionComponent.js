@@ -41,7 +41,7 @@ const CreateQuestionComponent = ({ AddQuestion }) => {
   }, []);
 
   return (
-    <form className="add-form">
+    <form className="form-control">
       <div className="form-control form-control-check">
         <div>
           <label>Enter Title</label>

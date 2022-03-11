@@ -13,7 +13,7 @@ const AnswerComponent = ({AddAnswers}) => {
   }
 
   return (
-      <form className="add-form" >
+      <form className="form-control" >
         <div>
           <label>Enter Title</label>
           <input
