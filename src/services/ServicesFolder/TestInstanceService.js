@@ -3,6 +3,15 @@ import http from "../httpService";
 
 const serverRoute = "/TestInstancesRoutes/";
 
+/*{
+  "TestId":2,
+  "Email":"email@gmail.com",
+  "FirstName":"nik",
+  "LastName":"ger",
+  "IsPassed":true,  
+   "answers": [ 1 , 2 ,3]
+}*/
+//=====>
 const TestInstanceService = { 
   async AddTestInstance(TestInstance) {
     const result = await http.post(serverRoute + "create",  TestInstance)
