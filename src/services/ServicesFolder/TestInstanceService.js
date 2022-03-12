@@ -1,7 +1,7 @@
 import http from "../httpService";
 
 
-const serverRoute = "/TestInstancesRoutes/";
+const serverRoute = "/TestInstances/";
 
 /*{
   "TestId":2,

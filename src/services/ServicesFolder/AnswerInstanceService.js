@@ -1,7 +1,7 @@
 import http from "../httpService";
 
 
-const serverRoute = "/AnswerInstanceRoutes/";
+const serverRoute = "/AnswerInstance/";
 
 const AnswerInstanceService = { 
   async AddAnswerInstance(AnswerInstance) {

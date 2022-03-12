@@ -6,10 +6,10 @@ import AnswerInstanceService from "../services/ServicesFolder/AnswerInstanceServ
 const EndTest = ({submittedAnswers, testinstanceid}) => {
   let navigate = useNavigate();
   useEffect(() => {
-    // const sendUserAnswers = async () => {
-    //   AnswerInstanceService.AddAnswerInstance({submittedAnswers, testinstanceid})
-    // };
-    
+    const sendUserAnswers = async () => {
+      await AnswerInstanceService.AddAnswerInstance({submittedAnswers, testinstanceid})
+    };
+    sendUserAnswers();
   }, []);
 
   return (
