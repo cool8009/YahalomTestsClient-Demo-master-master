@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Questions from "./components/Questions";
 import Tests from "./components/Tests";
+import CreateQuestionNew from "./components/CreateQuestionNew";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TestInstance from "./components/TestInstance";
 import TestInstanceForm from "components/TestInstanceForm";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/testform/:id" element={<TestInstanceForm />} />       
         <Route path="/createTest" element={<CreateTest />} />    
         <Route path="/createQuestion" element={<CreateQuestionComponent />} />       
+        <Route path="/createQuestionNew" element={<CreateQuestionNew />} />       
       </Routes>
     </Router>
   );
