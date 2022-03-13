@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { useNavigate, } from "react-router-dom";
 import AnswerInstanceService from "../services/ServicesFolder/AnswerInstanceService";
+import TestInstanceService from '../services/ServicesFolder/TestInstanceService'
 
-
-const EndTest = ({submittedAnswers, testinstanceid}) => {
+const EndTest = ({submittedAnswers, testinstanceid,id}) => {
   let navigate = useNavigate();
   useEffect(() => {
     const sendUserAnswers = async () => {
-      await AnswerInstanceService.AddAnswerInstance({submittedAnswers, testinstanceid})
+      await TestInstanceService.UpdateTestInstance({answers: submittedAnswers,TestInstanceId: testinstanceid, testId:id})
     };
     sendUserAnswers();
   }, []);

@@ -124,6 +124,7 @@ const TestInstance = () => {
               <EndTest
                 submittedAnswers={submittedAnswers}
                 testinstanceid={testinstanceid}
+                testId={id}
               />
             </div>
           );
