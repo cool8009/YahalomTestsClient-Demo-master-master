@@ -8,7 +8,7 @@ import CreateQuestionNew from "./components/CreateQuestionNew";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TestInstance from "./components/TestInstance";
 import TestInstanceForm from "components/TestInstanceForm";
-import CreateTest from "components/CreateTest/CreateTest";
+
 import CreateQuestionComponent from "components/CreateTest/CreateQuestionComponent";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
         <Route path="/test/:id" element={<TestInstance />} />       
         <Route path="/test/:id/:testinstanceid" element={<TestInstance />} />       
         <Route path="/testform/:id" element={<TestInstanceForm />} />       
-        <Route path="/createTest" element={<CreateTest />} />    
+          
         <Route path="/createQuestion" element={<CreateQuestionComponent />} />       
         <Route path="/createQuestionNew" element={<CreateQuestionNew />} />       
       </Routes>

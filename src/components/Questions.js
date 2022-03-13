@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import QuestionsTable from "./QuestionsTable";
 import QuestionForm from "./QuestionForm";
 import QuestionService from "../services/ServicesFolder/QuestionService"
 //const QuestionService = require("../services/Services").QuestionService;
 
 const Questions = () => {
+  let navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   useEffect(() => {
     const getQuestions = async () => {
@@ -28,7 +30,9 @@ const Questions = () => {
       </div>
       <div className="side">
         <h1>Add a new question</h1>
-        <QuestionForm onAddQuestion={addQuestion} />
+        <button className="btn" onClick={() => navigate('/createQuestionNew')}>
+          Go To Questions
+        </button>
       </div>
     </div>
   );
