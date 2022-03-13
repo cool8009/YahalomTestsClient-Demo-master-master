@@ -1,19 +1,19 @@
 import http from "../httpService";
 
-
 const serverRoute = "/Question/";
 
-const QuestionService = { 
+const QuestionService = {
   async AddQuestion(question) {
-     await http.post(serverRoute + "create", question);
+    const result = await http.post(serverRoute + "create", question);
+    return result;
   },
-  
+
   async UpdateQuestion(newQuestion) {
-     await http.put(serverRoute + "Update", newQuestion);
+    await http.put(serverRoute + "Update", newQuestion);
   },
-  
+
   async GetAllQuestions() {
-    const result =  await http.get(serverRoute + "GetAll");
+    const result = await http.get(serverRoute + "GetAll");
     return result.data;
   },
 
@@ -28,8 +28,8 @@ const QuestionService = {
   },
 
   async DeleteQuestion(id) {
-     await http.delete(serverRoute + "Delete/" + id);
-  }
+    await http.delete(serverRoute + "Delete/" + id);
+  },
 };
 
 export default QuestionService;

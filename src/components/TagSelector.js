@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import CreateTag from './CreateTag'
 
-const TagSelector = ({ allTags, questionTags, setQuestionTags }) => {
+const TagSelector = ({ allTags, questionTags, setQuestionTags, selectedTag, handleAddTag }) => {
   const addToTagList = (e) => {
-    setQuestionTags([...questionTags, e.currentTarget.value]);
+    selectedTag(e.currentTarget.value);
   };
 
   return (
@@ -30,6 +30,7 @@ const TagSelector = ({ allTags, questionTags, setQuestionTags }) => {
       <p>Or, create a new tag:</p>
       <CreateTag
         allTags={allTags}
+        handleAddTag={handleAddTag}
       />
     </div>
   );

@@ -7,4 +7,5 @@ module.exports = {
     TestInstanceService: require('./ServicesFolder/TestInstanceService'),
     AnswerService: require('./ServicesFolder/AnswerService'),
     AnswerInstanceService: require('./ServicesFolder/AnswerInstanceService'),
+    QuestionTagsService: require('./ServicesFolder/QuestionTagsService'),
 }

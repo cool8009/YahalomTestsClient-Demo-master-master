@@ -5,8 +5,9 @@ const serverRoute = "/Tag/";
 
 const TagService = { 
   async AddTag(Tag) {
-     await http.post(serverRoute + "create", Tag)
+     const result = await http.post(serverRoute + "create", Tag)
       .catch((err) => console.log(err));
+      return result;
   },
   
   async UpdateTag(newTag) {

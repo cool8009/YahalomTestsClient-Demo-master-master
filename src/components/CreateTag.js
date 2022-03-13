@@ -1,16 +1,25 @@
 import React, { useState } from "react";
 import TagService from "../services/ServicesFolder/TagService";
 
-const CreateTag = () => {
+const CreateTag = ({handleAddTag}) => {
   const [title, setTitle] = useState('');
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!title) {
       alert("Please enter a title");
     }
-    const value = await TagService.AddTag({ title }).catch((err) =>
-    console.log(err)
-    );
+    const value = await TagService.AddTag({ title })
+      .then((res) => {
+        return res.data
+      })
+      .then((res) => {
+        let TagId = res;
+        let Title = title;
+        handleAddTag({TagId, Title});
+      })
+      .catch((err) =>
+        console.log(err)
+      );
   };
   return (
     <form className="add-form" onSubmit={onSubmit}>

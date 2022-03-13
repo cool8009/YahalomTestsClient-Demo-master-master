@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import CreateTag from "./CreateTag";
 import TagSelector from "./TagSelector";
 import TagService from "../services/ServicesFolder/TagService";
+import QuestionService from "../services/ServicesFolder/QuestionService";
+import AnswerService from "../services/ServicesFolder/AnswerService";
+import QuestionTagsService from "../services/ServicesFolder/QuestionTagsService";
+import AnswerComponent from "../components/CreateTest/AnswerComponent";
 
 const CreateQuestionNew = () => {
   const [questionTitle, setQuestionTitle] = useState("");
@@ -9,6 +13,9 @@ const CreateQuestionNew = () => {
   const [isSingleChoice, setIsSingleChoice] = useState(true);
   const [questionTags, setQuestionTags] = useState([]);
   const [allTags, setAllTags] = useState([]);
+  const [amountOfAnswers, setAmountOfAnswers] = useState(2);
+  const [userAnswers, setUserAnswers] = useState([{
+  }]);
 
   useEffect(() => {
     const initializeAllTags = async () => {
@@ -25,6 +32,18 @@ const CreateQuestionNew = () => {
     setQuestionTags([...questionTags, tag]);
   };
 
+  const onAddAnswer = async (answer) => {
+      debugger;
+    setUserAnswers([...userAnswers, answer]);
+  };
+
+  const onRemoveAnswer = async (answer) => {
+    if (userAnswers.Length === 0 || amountOfAnswers < 2) return;
+    const newUserAnswers = userAnswers.filter((a) => a !== answer);
+    setUserAnswers(newUserAnswers);
+    setAmountOfAnswers(amountOfAnswers - 1);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!questionTitle) {
@@ -34,32 +53,47 @@ const CreateQuestionNew = () => {
       alert("Please enter a questionContent");
     }
 
-    //TODO TOMORROW: 
-    //POST question and tags to relevant DB columns, add answers to the equation and post it too.
-
-
-
-    //1. create question in api via post
-    //(then ) create answers for the question, with the questionid
-
-    // const value = await createTestInstance({ TestId ,Email, FirstName, LastName })
-    //         .then((res) => {return res.data})
-    //         .then((res) => navigate('/test/' + id + '/' + res))
+    try {
+      const value = await QuestionService.AddQuestion({
+        Title: questionTitle,
+        Content: questionContent,
+        IsSingleChoice: isSingleChoice,
+      })
+        .then((res) => {
+          return res.data;
+        })
+        .then((res) =>
+          questionTags
+            .forEach(
+              async (tag) =>
+                await QuestionTagsService.AddQuestionTag({
+                  QuestionId: res,
+                  TagId: tag.TagId,
+                })
+            )
+            .then((res) => AnswerService.AddAnswer({}))
+        );
+    } catch (error) {
+      console.log(error);
+    }
 
     setQuestionTitle("");
     setQuestionContent("");
     setIsSingleChoice(false);
   };
 
+  const handleAddTag = (tag) => {
+    setAllTags([...allTags, tag]);
+  };
   return (
     <div className="homeContainer">
-        <h2>Create your Own Question</h2>
+      <h2>Create your Own Question</h2>
       <form className="add-form" onSubmit={onSubmit}>
         <div className="form-control">
           <label>Enter Question Title</label>
           <input
             type="text"
-            placeholder="Email"
+            placeholder="Title"
             value={questionTitle}
             onChange={(e) => setQuestionTitle(e.target.value)}
           />
@@ -68,7 +102,7 @@ const CreateQuestionNew = () => {
           <label>Enter Content</label>
           <input
             type="text"
-            placeholder="First Name"
+            placeholder="Content"
             value={questionContent}
             onChange={(e) => setQuestionContent(e.target.value)}
           />
@@ -83,12 +117,28 @@ const CreateQuestionNew = () => {
           />
         </div>
       </form>
-        <TagSelector 
-            allTags={allTags}
-            questionTags={questionTags}
-            setQuestionTags={setQuestionTags}
+      <TagSelector
+        handleAddTag={handleAddTag}
+        allTags={allTags}
+        questionTags={questionTags}
+        setQuestionTags={setQuestionTags}
+        selectedTag={selectedTag}
+      />
+      {[...Array(amountOfAnswers)].map((value: undefined, index: number) => (
+        <AnswerComponent
+          id={index + 1}
+          key={index}
+          onAddAnswer={onAddAnswer}
+          onRemoveAnswer={onRemoveAnswer}
         />
-        <input className="btn" type="submit" value="Save Question" />
+      ))}
+      <button
+        className="btn"
+        onClick={() => setAmountOfAnswers(amountOfAnswers + 1)}
+      >
+        Add Answer
+      </button>
+      <input className="btn" type="submit" value="Save Question" />
     </div>
   );
 };
